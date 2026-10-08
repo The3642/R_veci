@@ -96,12 +96,63 @@ oblibene_cislo %/% 2 == 1 |rok_nar > 2005
 # cast B ------
 # ukol 7 ------
 dny <- c("po", "ut", "st", "ct", "pa", "so", "ne")
-kroky <- c(6200, 4800, 3300, 5900, 4300, 2700, NA)
-kroky <- names(dny)
-length(kroky)
+kroky <- c(6200, 4800, 9300, 5900, 12300, 2700, NA)
+names(kroky) <- dny   # co udelalao to kroky <- names(dny)
+length(kroky) 
+
+
+# uloha 8 ------
+kroky["so":"ne"] #?????????????????
+kroky[-1]
+kroky[2:4]
+kroky[length(kroky)]
 
 
 
-names(dny[-1]), 
+# uloha 9------
+kroky[kroky > 8000]
+names(kroky[kroky > 8000 & !is.na(kroky)]) # to pak royepsat 
+
+length(names(kroky[kroky > 8000 & !is.na(kroky)]))
+
+
+#uloha 10 -----
+prumer <- mean(kroky, na.rm =TRUE)
+sum(is.na(kroky))
+which(is.na(kroky)) # i s dnem 
+
+#uloha 11 -----
+
+kroky[is.na(kroky)] <- round(prumer)
+kroky
+
+
+#uloha 12 -----
+cil <- rep(c(8000, 12000), times = c(5, 2))
+rozdil <- kroky - cil 
+rozdil
+splneno <- c(kroky - cil >0)
+kroky[-1] %in% splneno #????????????????
+
+#uloha 13--------
+km <- round(kroky * 0.75, 2)
+sum(km)
+# R nasoby vektory po prvcich takze 0.75 se postupne vynaobim s kazdym prvkem v krocich 
+
+#uloha14----
+
+names(km)[which.max(km)]
+names(km)[which.min(km)]  # toto neamma tuseni jak funguje 
+
+names(km)[which.range(km)] # toto bz bzlo cool kdzbz fungovao 
+
+
+sort(kroky, decreasing = TRUE)
+head(sort(kroky, decreasing = TRUE), 3) #? to nevim jak se stalo udelalt to internet lol 
+
+
+#uloha 15 ------
+
+cumsum(kroky) * 0.65
 
 
