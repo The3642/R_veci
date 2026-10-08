@@ -72,7 +72,6 @@ vyska <- c(175, 181, 184)
 names(vyska) <- c("Jan", "Roman", "Petr")
 
 
-
 # 3. Vyber prvku (indexace) ---------------------------------------------------
 
 # (a) podle POZICE - R indexuje od 1, ne od 0
@@ -111,7 +110,7 @@ names(teploty[teploty > 12])
 
 
 # >>> UKOL 8: Kolik takovych dnu bylo? (Vyjdete z vysledku ukolu 7.)
-# ??????????????????????????????????????????
+length(names(teploty[teploty > 12]))
 
 
 # Zapis do vektoru funguje stejne - jen je prirazeni na druhou stranu:
@@ -159,7 +158,7 @@ ceny_eur
 # >>> UKOL 11: Vytvorte vektor  mesice <- 1:12  a pomoci recyklace
 #     z nej udelejte vektor, kde budou lichy mesic zaporny a sudy kladny.
 mesice <- 1:12
-mesice * c(-1, 1)            #????????
+mesice * c(-1, 1)           
  
 # 5. Vektor unese jen jeden typ: coercion ------------------------------------
 
@@ -190,7 +189,8 @@ class(c(1L, TRUE, 2.5))       # bude numeric
 
 # >>> UKOL 13: Kolik dnu ve vektoru  teploty  melo vice nez 11 stupnu?
 #      Vyreste to JEDNIM vyrazem.
-teploty[teploty > 11]    #????????????????
+names(teploty[teploty > 11])
+length(names(teploty[teploty > 11]))
 
 # 6. Chybejici hodnoty: NA ----------------------------------------------------
 
@@ -269,7 +269,7 @@ table(barvy)                  # cetnostni tabulka - vratime se k ni v T04
 #      a den, kdy bylo nejtepleji (jmeno prvku, ne cislo pozice.)
 mean(teploty)
 max(teploty)
-max(teploy.name)
+max(teploty(name)) #???????????
 names(which.max(teploty))
 min(teploty)
 names(which.min(teploty))
@@ -281,7 +281,7 @@ sort(x, decreasing = TRUE) [1:3]
 
 # >>> UKOL 18: Overte jednim vyrazem, jestli jsou VSECHNY teploty kladne.
 #      A jestli byl aspon jeden den nad 14 stupnu.
-trploty > 0 & which(teploty < 14) #??????????????????????????
+c(all(teploty > 0), any(teploty > 14))
 
 # 8. Operator %in% ------------------------------------------------------------
 
@@ -340,12 +340,15 @@ sum(1, 2, 3, 4, 5)
 # >>> UKOL 20: Podivejte se do napovedy k funkci  sort() .
 #      Kolik ma argumentu, ktery je povinny a ktery ma vychozi hodnotu?
 #      Seradte vektor  x  sestupne dvema ruznymi zapisy (pozicne i jmenne).
-
-
+help(sort)
+# x a decreasing
+# x je povinne a decreasing ma vychozi hodnotu 
+sort(x, TRUE)                  # by position: decreasing is the 2nd argument
+sort(x, decreasing = TRUE)
 # >>> UKOL 21: Najdete v napovede funkce  round() , co presne dela
 #      round(2.5) a round(3.5). Spustte to. Prekvapilo vas to?
 #      (Hint: hledejte v napovede slovo "rounding".)
-
+help(round)
 
 # 10. Co si odnest ------------------------------------------------------------
 
