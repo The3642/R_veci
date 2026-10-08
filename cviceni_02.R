@@ -365,3 +365,8 @@ help(round)
 #
 # Priste: matice a pole - vektor, ktery ma radky a sloupce.
 #         Take se zadava PRVNI DOMACI UKOL.
+
+
+
+#doplneni----
+
