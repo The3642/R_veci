@@ -86,14 +86,22 @@ is.na(pocet_hodinek)
 
 # uloha 6 -----
 osobni_klic > 20 & pocet_osob < 10
-oblibene_cislo % ě == 1 I rok_narozeni > 2005 #???????
+oblibene_cislo %/% 2 == 1 |rok_nar > 2005
+
+#nevim ??????????????????
 
 
-#---- cast b 
+
+
+# cast B ------
+# ukol 7 ------
 dny <- c("po", "ut", "st", "ct", "pa", "so", "ne")
 kroky <- c(6200, 4800, 3300, 5900, 4300, 2700, NA)
 kroky <- names(dny)
-kroky
+length(kroky)
+
+
+
 names(dny[-1]), 
 
 
