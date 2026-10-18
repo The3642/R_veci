@@ -8,6 +8,8 @@ pocet_osob = 3L
 class(pocet_osob)
 typeof(pocet_osob)
 pokus <- 4 
+class(pokus)
+typeof(pokus)
 # díky L je to cele nvm more ?????????????
 
 
@@ -180,4 +182,6 @@ vazene[kroky14 < 3000] <- 0
 body <- vazene 
 body
 
+celkem <- sum(body)
+celkem
 
