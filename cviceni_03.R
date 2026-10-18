@@ -39,11 +39,11 @@ matrix(NA, nrow = 2, ncol = 4)
 
 # >>> UKOL 1: Vytvorte matici  A  o rozmerech 3 x 4, ktera obsahuje
 #     cisla 1 az 12 doplnena PO RADCICH.
-
-
+A <- matrix(1:12, nrow = 3, byrow = TRUE)
+A
 # >>> UKOL 2: Vytvorte matici  B  o rozmerech 4 x 3, ktera obsahuje
 #     stejna cisla, ale doplnena PO SLOUPCICH.
-
+B <- matrix(1:12, nrow = 4)
 
 # 2. Rozmery matice -----------------------------------------------------------
 
@@ -54,6 +54,7 @@ length(m)     # pocet PRVKU celkem - matice je porad vektor!
 
 # dim() jde i nastavit - a tim se z vektoru stane matice:
 v <- 1:12
+v
 dim(v) <- c(3, 4)
 v
 class(v)
@@ -62,8 +63,11 @@ class(v)
 matrix(1:6, ncol = 3, nrow = 3)
 
 # >>> UKOL 3: Zjistete rozmery matice A a jeji celkovy pocet prvku.
-#     Kolik prvku ma matice o rozmerech dim(A)?
+dim(A)
+length(A)
 
+#     Kolik prvku ma matice o rozmerech dim(A)?
+length(dim(A))
 
 # 3. Jmena radku a sloupcu ----------------------------------------------------
 
@@ -79,12 +83,13 @@ dimnames(prodeje)
 
 # Jmena jde zadat rovnou pri tvorbe - jako list dvou vektoru:
 matrix(1:4, nrow = 2,
-       dimnames = list(c("r1", "r2"), c("s1", "s2")))
+          dimnames = list(c("r1", "r2"), c("s1", "s2")))
 
 # >>> UKOL 4: Pojmenujte radky matice A jako "r1", "r2", "r3"
 #     a sloupce jako "s1" az "s4". Vytisknete ji.
-
-
+rownames(A) <- paste0("r", 1:3)
+colnames(A) <- paste0("s", 1:4)
+A
 # 4. Indexace matice ----------------------------------------------------------
 
 # U vektoru byl v hranatych zavorkach jeden index. U matice jsou DVA,
@@ -104,17 +109,20 @@ prodeje[-1, ]              # vsechno krome prvniho radku
 prodeje[, prodeje[1, ] > 100]    # sloupce, kde mela Praha vic nez 100
 
 # >>> UKOL 5: Z matice A vypiste druhy radek.
-
+A[2, ]
 
 # >>> UKOL 6: Z matice A vypiste treti sloupec.
+A[ ,3]
 
 
 # >>> UKOL 7: Z matice A vypiste prvek na pozici [2, 3].
+A[2,3]
 #     Pak prvni dva radky a posledni dva sloupce zaroven.
+A[c(1,2), ] [, c(3,4)]
 
 
 # POZOR - past, kterou musite znat:
-prodeje[1, ]               # vypada to jako matice, ale...
+prodeje[1, ]             # vypada to jako matice, ale...
 class(prodeje[1, ])        # ..."numeric" - je to VEKTOR!
 dim(prodeje[1, ])          # NULL - rozmery zmizely
 
@@ -126,7 +134,9 @@ dim(prodeje[1, , drop = FALSE])
 
 # >>> UKOL 8: Vyberte z matice A prvni sloupec tak, aby vysledek zustal
 #     matici (a ne vektorem). Overte to funkci dim().
-
+A[, 1, drop = FALSE]
+dim(A)
+class(A[, 1, drop = FALSE])
 
 # Zapis do matice funguje stejne jako cteni:
 prodeje[1, 1] <- 125
@@ -138,6 +148,7 @@ prodeje
 
 # rbind = "row bind", prilepi radek (nebo matici) zespodu
 # cbind = "column bind", prilepi sloupec zprava
+prodeje2
 
 prodeje2 <- rbind(prodeje, Ostrava = c(70, 65, 80))
 prodeje2
