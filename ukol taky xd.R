@@ -153,6 +153,31 @@ head(sort(kroky, decreasing = TRUE), 3) #? to nevim jak se stalo udelalt to inte
 
 #uloha 15 ------
 
-cumsum(kroky) * 0.65
+cumsum(kroky) #??????????????????????????
+
+
+
+
+# cast C -----
+kroky14 <- c(kroky, round(kroky + kroky * oblibene_cislo/100))
+names(kroky14) <- paste0(rep(dny, 2), rep(1:2, each = 7))  # co toto je nemam tucha
+kroky14["st2"] <- 1500
+kroky14
+
+
+zakladni<- kroky14 %/% 1000  #celocisleene deleni 
+zakladni
+
+vahy <- c(1, 1, 1, 1, 1, 2, 2)
+vazene <- zakladni * vahy
+vazene 
+
+# vahy maji pocet cisel ktery je ddeliteln pocetem prvku v zakladni 
+vazene <- vazene + (kroky14 >= 10000) * 5   # toto je v pici
+body <- vazene 
+
+vazene[kroky14 < 3000] <- 0
+body <- vazene 
+body
 
 
