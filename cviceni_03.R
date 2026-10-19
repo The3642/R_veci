@@ -162,11 +162,13 @@ cbind(1:3, 4:6)
 
 # >>> UKOL 9: Pridejte k matici A ctvrty radek s hodnotami 100 az 400
 #     (po stovkach). Vysledek ulozte do  A2 .
-
+A2 <- rbind(A, seq(100, 400, by = 100))
+A2
 
 # >>> UKOL 10: K matici A2 pridejte paty sloupec, ktery bude obsahovat
 #     soucet kazdeho radku. (Funkci na soucty radku najdete o kus nize -
 #     nebo si ji zkuste najit v napovede sami.)
+cbind(A2, rowSums(A2))
 
 
 # 6. Aritmetika: po prvcich vs. maticove nasobeni -----------------------------
@@ -191,10 +193,12 @@ X %*% Y      # radek krat sloupec
 
 # >>> UKOL 11: Spoctete rozdil matic A2[1:3, 1:3] a matice, ktera ma
 #     na vsech mistech trojku (rozmer 3 x 3).
+A2[1:3, 1:3] - matrix(3, nrow = 3, ncol = 3)
 
 
 # >>> UKOL 12: Overte na papire i v R, ze pro matice obecne
 #     NEPLATI  X %*% Y == Y %*% X .
+X %*% Y == Y %*% X
 
 
 # 7. Klasicke maticove funkce -------------------------------------------------
@@ -202,7 +206,7 @@ X %*% Y      # radek krat sloupec
 M <- matrix(c(2, 2, 1, 3), nrow = 2)
 M
 
-t(M)          # transpozice - prehodi radky a sloupce
+t(M)        # transpozice - prehodi radky a sloupce
 diag(M)       # diagonala matice (jako vektor)
 diag(3)       # jednotkova matice 3 x 3 - pozor, jina role stejne funkce!
 diag(c(1, 2, 3))   # diagonalni matice ze zadaneho vektoru
@@ -221,6 +225,9 @@ solve(M, b)
 # >>> UKOL 13: Overte, ze matice  matrix(c(1, 2, 2, 4), nrow = 2)
 #     je singularni (ma nulovy determinant). Pak zkuste spocitat
 #     jeji inverzi a prectete si hlasku.
+matrix(c(1, 2, 2, 4), nrow = 2)
+det(matrix(c(1, 2, 2, 4), nrow = 2))
+solve(matrix(c(1, 2, 2, 4), nrow = 2))
 
 
 # >>> UKOL 14: Vyreste soustavu:
@@ -228,6 +235,16 @@ solve(M, b)
 #         x + 3y = 14
 #     Sestavte matici soustavy a vektor pravych stran a pouzijte solve().
 #     Vysledek overte dosazenim.
+rovnice <- matrix(c(2, 1, 1, 3), nrow = 2)
+vysledky <- matrix(c(8, 14), nrow = 2)
+
+solve(rovnice, vysledky)
+
+x <- 2
+y <- 4
+
+2*x + y == 8
+x + 3*y == 14
 
 
 # 8. Souhrny po radcich a sloupcich -------------------------------------------
@@ -243,9 +260,13 @@ colMeans(prodeje3)    # prumer kazdeho sloupce
 
 # >>> UKOL 15: Ktere mesto melo nejvyssi celkove trzby?
 #     (Hint: rowSums() a which.max() z minule hodiny.)
+ 
+names(which.max(rowSums(prodeje3)))
 
 
 # >>> UKOL 16: Ktery mesic byl v souctu nejslabsi?
+names(which.min(rowSums(prodeje3)))
+
 
 
 # 9. apply() - kdyz potrebujete neco jineho nez soucet -----------------------
@@ -267,10 +288,13 @@ apply(prodeje3, 1, range)     # pozor, vraci matici - kazdy vysledek je dvojice
 
 # >>> UKOL 17: Najdete pro kazdy mesic (sloupec) matice prodeje3
 #     maximalni a minimalni trzbu.
+apply(prodeje3, 2, max)
+apply(prodeje3, 2, min)
 
 
 # >>> UKOL 18: Spoctete pro kazde mesto (radek) smerodatnou odchylku trzeb.
 #     (Funkce se jmenuje sd().)
+apply(prodeje3, 2, sd)
 
 # Rodinu funkci apply/sapply/lapply probereme poradne v T07.
 # Dnes ji berte jen jako nastroj, ktery se hodi.
@@ -308,10 +332,12 @@ apply(pole, c(1, 3), sum)    # soucet za kazde mesto a rok
 
 # >>> UKOL 19: Z pole  pole  vypiste vsechny hodnoty za rok 2025.
 #     Jaky ma vysledek rozmer?
-
+pole[ , , 1]
+dim(pole[ , , 1])
 
 # >>> UKOL 20: Spoctete prumernou trzbu za kazdy mesic pres obe mesta
 #     a oba roky. (Hint: apply() s MARGIN = 2.)
+apply(pole, 2, mean)
 
 
 # 11. Co si odnest ------------------------------------------------------------
