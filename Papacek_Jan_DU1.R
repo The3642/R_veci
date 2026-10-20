@@ -13,15 +13,14 @@ pokus <- 4
 class(pokus)
 typeof(pokus)
 
-# pocet osob je int a pkus je numeric a double,  Integer ukládá celá čísla, zatímco numeric (double)
-# umožňuje ukládat i desetinná čísla.
+# pocet osob je int a pokus je numeric a double, diky L se to ulozi jako int 
 
 ## Uloha 2 ----
 
 prijmeni <- "papacek"
 oblibene_cislo <- 6
 
-prijmeni * 2 #Error in prijmeni * 2 : non-numeric argument to binary operator
+#prijmeni * 2 #Error in prijmeni * 2 : non-numeric argument to binary operator
 cislo_textem <- "12"
 
 as.numeric(cislo_textem) + oblibene_cislo
@@ -58,21 +57,21 @@ class(pocet_hodinek)  #logical
 1/0
 0/0
 # 1/0 vraci Inf a 0/0 NaN 
-# deleni nenuloveho cisla nulou predstavuje limitu, ktera roste do nekonecna
-# deleni nuly nulou je v matematice tzv neurcitz vyraz
+# deleni jednicku nulou je Inf protoze s mensim jmenovatelem roste hodnota
+# deleni nuly nulou nejde
 
 pocet_hodinek + 1
 pocet_hodinek == NA
-# nevim cemu se rovna takye nemuze mit odpoved TRUE or FALSE ale pouze NA 
+# nevim cemu se rovna takze nemuze mit odpoved TRUE or FALSE ale pouze NA 
 
-is.na(pocet_hodinek) # spravny dotaz 
+is.na(pocet_hodinek) # spravne
 
 ## Uloha 6 ----
 osobni_klic > 20 & pocet_osob < 10 
 
 oblibene_cislo %% 2 == 0 | rok_nar > 2005
 
-ls() # v zivote jsem toto nevidel ??????????????????
+ls() 
 # cislo_textem"   "den_nar"        "mesic_nar"      "oblibene_cislo" "osobni_klic"   
 # "pocet_hodinek"  "pocet_osob"     "pokus"          "prijmeni"       "rok_nar"
 
@@ -96,10 +95,9 @@ kroky[length(kroky)]
 
 ## Uloha 9 ----
 
-names(kroky[kroky > 8000 & !is.na(kroky)]) # to nechapu ?????????
-kroky[kroky > 8000 & ! is.na(kroky)] # nevim jeslti jenom anems nebo i pocet 
+names(kroky[kroky > 8000 & !is.na(kroky)]) 
 
-length(names(kroky[kroky > 8000 & !is.na(kroky)]))   # pocet dnu 
+length(names(kroky[kroky > 8000 & !is.na(kroky)]))   
 
 ## Uloha 10 ----
 
@@ -117,27 +115,28 @@ any(is.na(kroky))
 
 ## Uloha 12 ----
 
-cil <- rep(c(8000, 12000), times = c(5, 2))  # toto pochopit 
+cil <- rep(c(8000, 12000), times = c(5, 2))  
 
 rozdil <- kroky - cil
-length(names(rozdil[rozdil > 0]))  # kolik snu jsem splnil
+
+length((rozdil[rozdil > 0]))  # kolik dnu jsem splnil
 
 splneno <- names(rozdil[rozdil > 0])
 
- # (c) jednim výrazem overte, jestli je mezi nimi nedele. nemamm 
+"ne" %in% splneno
 
 ## Uloha 13 ----
 
 km <- round(kroky * 0.75 / 1000, 2)
-# cyklus neni potreba protoze R provede vypocet automaticky pro všechny prvky vektoru najednou
+# cyklus neni potreba protoze se provede v tom vektoru ta operace s kazdym prvkem sama
 
 sum(km)
 
 ## Uloha 14 ----
 
-names(km)[which.max(km)]  # nevim co toto dela
+names(km)[which.max(km)]  
 
-names(km)[which.min(km)] # nevim co toto dela
+names(km)[which.min(km)] 
 
 
 sort(kroky, decreasing = TRUE)
@@ -146,9 +145,9 @@ sort(kroky, decreasing = TRUE)[1:3]
 
 ## Uloha 15 ----
 
-names(kroky)[which(cumsum(kroky) >= sum(kroky) * 0.65)[1]] # co to je toto ????????
+names(kroky)[which(cumsum(kroky) >= sum(kroky) * 0.65)[1]] # co to je toto ???????????
 
-# Cast C ----
+# Cast C =====
 
 ## Uloha 16 ----
 
@@ -158,11 +157,10 @@ kroky2 <- round(kroky + (oblibene_cislo / 100 * kroky))
                
 kroky14 <- c(kroky, kroky2)
 
-names(kroky14) <- paste0(rep(dny, 2), rep(c(1, 2), each = 7))
+names(kroky14) <- paste0(rep(dny, 2), rep(c(1, 2), each = 7)) #????????????
 
 kroky14["st2"] <- 1500
 
-# tuhle cast vubec nechapu realn 
 
 ### b ----
 
@@ -175,7 +173,7 @@ vazene <- vahy * zakladni
 
 ### c  ----
 
-body<- vazene + (kroky14 >= 10000) * 5
+body<- vazene + (kroky14 >= 10000) * 5 #???????
 
 body[kroky14 < 3000] <- 0
 
@@ -193,8 +191,10 @@ names(sort(body, decreasing = TRUE))[1]  # nevim nevim
 
 hranice <- c(bronz = 100, stribro = 140, zlato = 180)
 
-names(hranice[celkem >= hranice])  # nevim jak toto 
-# chybi nejvzssi dosazena 
+names(hranice[celkem >= hranice])  
+
+names(which.max(hranice[celkem >= hranice]))#???????
+
 
 ### f  ----
 
@@ -223,6 +223,12 @@ paste0(den_v_tydnu, tyden)
 
 
 
+
+#Postupujte tak, že spočítáte průměrný denní počet kroků za celých uběhlých čtrnáct dní 
+#(a zaokrouhlete jej na celé číslo), a za předpokladu, že počínaje patnáctým dnem nachodíte denně vždy přesně tento počet kroků 
+#a soutěž trvá libovolně dlouho, odhadněte, kolikátý den kterého týdne poprvé na platinovou medaili dosáhnete.
+
+round(mean(kroky14))
 
 ### g  ----
 
