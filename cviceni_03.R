@@ -58,6 +58,7 @@ v
 dim(v) <- c(3, 4)
 v
 class(v)
+v
 
 # recyklace
 matrix(1:6, ncol = 3, nrow = 3)

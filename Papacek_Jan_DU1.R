@@ -5,6 +5,10 @@ den_nar <- 23
 mesic_nar <- 1
 rok_nar <- 2007
 
+den_nar 
+mesic_nar 
+rok_nar 
+
 pocet_osob <- 3L
 class(pocet_osob)
 typeof(pocet_osob)
@@ -20,14 +24,17 @@ typeof(pokus)
 prijmeni <- "papacek"
 oblibene_cislo <- 6
 
-#prijmeni * 2 #Error in prijmeni * 2 : non-numeric argument to binary operator
+#prijmeni * 2 
+#Error in prijmeni * 2 : non-numeric argument to binary operator
+
 cislo_textem <- "12"
 
 as.numeric(cislo_textem) + oblibene_cislo
 
 c(oblibene_cislo, TRUE, prijmeni)
-# cahracter díky logical → integer → double → character
-typeof(c(oblibene_cislo, TRUE, prijmeni))
+# cahracter diky logical → integer → double → character
+
+class(c(oblibene_cislo, TRUE, prijmeni))
 
 ## Uloha 3 ----
 
@@ -35,7 +42,7 @@ osobni_klic <- den_nar * mesic_nar + oblibene_cislo
 
 rok_nar %/% 100 
 rok_nar %% 100
-##  7 %/% 3 # celočíselné dělení -> 2    7 %% 3 # zbytek po dělení -> 1
+#  7 %/% 3 # celociselne deleni -> 2    7 %% 3 # zbytek po deleni -> 1
 
 ## Uloha 4 ----
 
@@ -46,8 +53,8 @@ round(osobni_klic/7, 2)
 
 help(log)
 log(x = osobni_klic, base = den_nar)
-log(x = osobni_klic, base = mesic_nar + 1) 
-# nechapu co chce s tm mesi c naroteni uplne
+log(x = osobni_klic, base = 1)
+# da Inf protoze jednicka umocnena na cokoliv je vzdy jedna 
 
 ## Uloha 5 ----
 
@@ -84,6 +91,7 @@ dny <- c("po", "ut", "st", "ct", "pa", "so", "ne")
 kroky <- c(6200, 4800, 9300, 5900, 12300, 2700, NA)
 
 names(kroky) <- dny
+kroky
 length(kroky)
 
 ## Uloha 8 ----
@@ -103,11 +111,14 @@ length(names(kroky[kroky > 8000 & !is.na(kroky)]))
 
 prumer <- mean(kroky, na.rm = TRUE)
 
+
+sum(is.na(kroky))
 which(is.na(kroky))  # kde je NA 
+
 
 ## Uloha 11 ----
 
-kroky[is.na(kroky)] <- round(prumer)  # nevim jak toto funguje 
+kroky[is.na(kroky)] <- round(prumer)  
 kroky
 
 which(is.na(kroky))
@@ -119,24 +130,24 @@ cil <- rep(c(8000, 12000), times = c(5, 2))
 
 rozdil <- kroky - cil
 
-length((rozdil[rozdil > 0]))  # kolik dnu jsem splnil
+length((rozdil[rozdil >= 0]))  # kolik dnu jsem splnil
 
-splneno <- names(rozdil[rozdil > 0])
+splneno <- names(rozdil[rozdil >= 0])
 
 "ne" %in% splneno
 
 ## Uloha 13 ----
 
 km <- round(kroky * 0.75 / 1000, 2)
-# cyklus neni potreba protoze se provede v tom vektoru ta operace s kazdym prvkem sama
+# cyklus neni potreba protoze se provede v tom vektoru ta operace s kazdym prvkem pokazde sama
 
 sum(km)
 
 ## Uloha 14 ----
 
-names(km)[which.max(km)]  
+names(kroky[which.max(kroky)])  
 
-names(km)[which.min(km)] 
+names(kroky[which.min(kroky)]) 
 
 
 sort(kroky, decreasing = TRUE)
@@ -144,8 +155,9 @@ sort(kroky, decreasing = TRUE)
 sort(kroky, decreasing = TRUE)[1:3]
 
 ## Uloha 15 ----
+soucet <- cumsum(kroky)
 
-names(kroky)[which(cumsum(kroky) >= sum(kroky) * 0.65)[1]] # co to je toto ???????????
+names(which(soucet >= sum(kroky) * 0.65))[1]
 
 # Cast C =====
 
@@ -157,24 +169,25 @@ kroky2 <- round(kroky + (oblibene_cislo / 100 * kroky))
                
 kroky14 <- c(kroky, kroky2)
 
-names(kroky14) <- paste0(rep(dny, 2), rep(c(1, 2), each = 7)) #????????????
+names(kroky14) <- paste0(rep(dny, 2), rep(c(1, 2), each = 7)) 
 
 kroky14["st2"] <- 1500
 
 
 ### b ----
 
-zakladni <- round(kroky14%/%1000)
+zakladni <- kroky14%/%1000
 
 vahy <- c(1, 1, 1, 1, 1, 2, 2)
 
 vazene <- vahy * zakladni
-# 14 je nasobek 7 kaye s vsecnz cisla postupne vynasobi
+vazene
+# 14 je nasobek 7 takze se vsechny cisla postupne vynasobi 
+# kdyby to blyo 5 tak by se to vynasobilo postupne zase ale vyhodilo by to Warning message
 
 ### c  ----
 
-body<- vazene + (kroky14 >= 10000) * 5 #???????
-
+body<- vazene + (kroky14 >= 10000) * 5 
 body[kroky14 < 3000] <- 0
 
 ### d  ----
@@ -182,10 +195,9 @@ body[kroky14 < 3000] <- 0
 celkem <- sum(body)
 celkem1 <- sum(body[1:7])
 celkem2 <- sum(body[8:14])
-celkem1 > celkem2
+celkem1 < celkem2
 
-names(body)[which.max(body)]
-names(sort(body, decreasing = TRUE))[1]  # nevim nevim 
+names(body[which.max(body)])
 
 ### e  ----
 
@@ -193,46 +205,49 @@ hranice <- c(bronz = 100, stribro = 140, zlato = 180)
 
 names(hranice[celkem >= hranice])  
 
-names(which.max(hranice[celkem >= hranice]))#???????
+names(which.max(hranice[celkem >= hranice]))
 
 
 ### f  ----
 
-names(body)[which(cumsum(body) >= 1000)[1]]
 
-prumer_kroku <- round(mean(kroky14))
+prumer2 <- round(mean(kroky14))
 
-zaklad_den <- prumer_kroku %/% 1000
-bonus_den <- (prumer_kroku >= 10000) * 5
+kroky_dalsi <- rep(prumer2, 500)
 
-dalsi_dny <- 1:1000
+kroky_celkem <- c(kroky14, kroky_dalsi)
 
-vikend <- dalsi_dny %% 7 == 6 | dalsi_dny %% 7 == 0
+# body
+zakladni_celkem <- kroky_celkem %/% 1000
 
-dalsi_body <- (zaklad_den * (1 + vikend) + bonus_den) *
-  (prumer_kroku >= 3000)
+vahy_celkem <- rep(c(1, 1, 1, 1, 1, 2, 2), length.out = length(kroky_celkem))
 
-soucet <- celkem + cumsum(dalsi_body)
+vazene_celkem <- vahy_celkem * zakladni_celkem
 
+body_celkem <- vazene_celkem + (kroky_celkem >= 10000) * 5
+
+body_celkem[kroky_celkem < 3000] <- 0
+
+
+soucet <- cumsum(body_celkem)
+
+# den 1000
 den <- which(soucet >= 1000)[1]
 
-tyden <- (14 + den - 1) %/% 7 + 1
-den_v_tydnu <- dny[(14 + den - 1) %% 7 + 1]
 
-paste0(den_v_tydnu, tyden)
-
+tyden <- (den - 1) %/% 7 + 1
+den_v_tydnu <- (den - 1) %% 7 + 1
 
 
+paste0(dny[den_v_tydnu], tyden)
 
-#Postupujte tak, že spočítáte průměrný denní počet kroků za celých uběhlých čtrnáct dní 
-#(a zaokrouhlete jej na celé číslo), a za předpokladu, že počínaje patnáctým dnem nachodíte denně vždy přesně tento počet kroků 
-#a soutěž trvá libovolně dlouho, odhadněte, kolikátý den kterého týdne poprvé na platinovou medaili dosáhnete.
 
-round(mean(kroky14))
 
 ### g  ----
 
 sum(kroky14 %/% 1000)
+
 celkem - sum(kroky14 %/% 1000)
+#bez ostatnich pravidel bych mel pouze 84 bodu tedy o 18 mene nez s pravidly
 
 
